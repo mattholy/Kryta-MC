@@ -2,7 +2,7 @@ FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9
 
 LABEL maintainer="Mattholy <smile.used@hotmail.com>"
 
-RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
-&& echo 'Asia/Shanghai' >/etc/timezone
+ENV ACCESS_LOG=/app/logs/access_log.log \
+    ERROR_LOG=/app/logs/error_log.log
 
 COPY ./app /app
