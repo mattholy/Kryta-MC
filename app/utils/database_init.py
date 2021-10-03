@@ -13,5 +13,10 @@ database_init.py
 '''
 
 from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String
 
-engine = create_engine('sqlite:///data/database-data/kryta-system.db')
+
+Base = declarative_base()
+engine = create_engine('sqlite:///kryta-system.db?check_same_thread=False')
+
