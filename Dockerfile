@@ -5,16 +5,11 @@ LABEL maintainer="Mattholy <smile.used@hotmail.com>"
 # ENV ACCESS_LOG=/app/logs/access_log.log \
 #     ERROR_LOG=/app/logs/error_log.log
 
-# Install Poetry
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | POETRY_HOME=/opt/poetry python && \
-    cd /usr/local/bin && \
-    ln -s /opt/poetry/bin/poetry && \
-    poetry config virtualenvs.create false
+ADD ./requirements.txt /app/requirements.txt
 
-# Copy using poetry.lock* in case it doesn't exist yet
-COPY ./app/pyproject.toml ./app/poetry.lock* /app/
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
+    && pip install -r requirements.txt
 
-RUN poetry install --no-root --no-dev \
-    pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+# RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
 
 COPY ./app /app
