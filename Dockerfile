@@ -10,6 +10,4 @@ ADD ./requirements.txt /app/requirements.txt
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple \
     && pip install -r requirements.txt
 
-# RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
-
 COPY ./app /app
