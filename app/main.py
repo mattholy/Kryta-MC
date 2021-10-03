@@ -15,17 +15,20 @@ import os
 import uvicorn
 from fastapi import FastAPI
 from fastapi import status as http_code
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+
+# 自定义的一些玩意儿
 from APIs import api, auth
+from utils.err_handler import http_422_handler
 
 # 准备一些环境变量
-URL_PREFIX = os.environ.get('KRYTA_URL_PREFIX','::')
+URL_PREFIX = "/" + os.environ.get('KRYTA_URL_PREFIX','::')
 
 # 初始化App
 app = FastAPI()
-app.mount("/" + URL_PREFIX + "/static", StaticFiles(directory="static"), name="static")
+app.mount("/" + URL_PREFIX + "/static", StaticFiles(directory="./app/static"), name="static")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -35,6 +38,7 @@ app.add_middleware(
 )
 app.include_router(api.router)
 app.include_router(auth.router)
+# 自定义
 description = """
 ## Features
 - Auto generate openapi json
@@ -57,6 +61,7 @@ app.openapi()["info"] = {
         "url": "https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png"
     }
 }
+
 
 # 开始路由
 @app.get("/", response_class=HTMLResponse, status_code=http_code.HTTP_303_SEE_OTHER, tags=['Pages'])
