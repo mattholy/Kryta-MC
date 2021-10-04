@@ -24,9 +24,9 @@ URL_PREFIX = os.environ.get('KRYTA_URL_PREFIX','::')
 
 app = FastAPI()
 router = APIRouter()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/" + URL_PREFIX + "/auth")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth")
 
-@router.post("/" + URL_PREFIX + "/api/{resource_category}/{resource_name}", tags=["APIs"], response_model=api_reponse)
+@router.post("/api/{resource_category}/{resource_name}", tags=["APIs"], response_model=api_reponse)
 async def api(
     resource_category: str,
     resource_name:str,

@@ -24,11 +24,10 @@ from APIs import api, auth
 from utils.err_handler import http_422_handler
 
 # 准备一些环境变量
-URL_PREFIX = "/" + os.environ.get('KRYTA_URL_PREFIX','::')
+URL_PREFIX = "/" + os.environ.get('KRYTA_URL_PREFIX','')
 
-# 初始化App
-app = FastAPI()
-app.mount("/" + URL_PREFIX + "/static", StaticFiles(directory="./app/static"), name="static")
+# 定义App
+app = FastAPI(root_path = "/" + URL_PREFIX)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -38,7 +37,6 @@ app.add_middleware(
 )
 app.include_router(api.router)
 app.include_router(auth.router)
-# 自定义
 description = """
 ## Features
 - Auto generate openapi json
@@ -62,19 +60,30 @@ app.openapi()["info"] = {
     }
 }
 
+# 启动
+@app.on_event("startup")
+def startup_event():
+    print("啊我开始了")
 
 # 开始路由
+app.mount("/static", StaticFiles(directory="./app/static"), name="static")
+
 @app.get("/", response_class=HTMLResponse, status_code=http_code.HTTP_303_SEE_OTHER, tags=['Pages'])
 async def gate():
     return RedirectResponse(app.url_path_for('auth'))
 
-@app.get("/" + URL_PREFIX + "/auth", response_class=HTMLResponse, tags=['Pages'])
+@app.get("/auth", response_class=HTMLResponse, tags=['Pages'])
 async def auth():
     return 'qewr'
 
-@app.get("/" + URL_PREFIX + "/dashboard", response_class=HTMLResponse, tags=['Pages'])
+@app.get("/dashboard", response_class=HTMLResponse, tags=['Pages'])
 async def dashboard():
     return '123'
+
+# 终止
+@app.on_event("shutdown")
+def shutdown_event():
+    print("啊我被关闭了")
 
 
 
