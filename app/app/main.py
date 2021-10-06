@@ -15,7 +15,7 @@ import os
 import uvicorn
 from fastapi import FastAPI
 from fastapi import status as http_code
-from fastapi.responses import HTMLResponse, RedirectResponse, PlainTextResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, PlainTextResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
@@ -29,7 +29,7 @@ from utils.err_handler import http_422_handler
 URL_PREFIX = "/" + os.environ.get('KRYTA_URL_PREFIX','')
 
 # 定义App
-app = FastAPI(root_path = "/" + URL_PREFIX)
+app = FastAPI(root_path = URL_PREFIX)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -71,16 +71,8 @@ def startup_event():
 app.mount("/static", StaticFiles(directory="./static"), name="static")
 
 @app.get("/", response_class=HTMLResponse, status_code=http_code.HTTP_303_SEE_OTHER, tags=['Pages'])
-async def gate():
-    return RedirectResponse(app.url_path_for('auth'))
-
-@app.get("/auth", response_class=HTMLResponse, tags=['Pages'])
-async def auth():
-    return 'qewr'
-
-@app.get("/dashboard", response_class=HTMLResponse, tags=['Pages'])
-async def dashboard():
-    return '123'
+async def main():
+    return FileResponse('./html/dist/index.html')
 
 # 终止
 @app.on_event("shutdown")
