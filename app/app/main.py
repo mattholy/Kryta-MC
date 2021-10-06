@@ -23,7 +23,6 @@ from fastapi.staticfiles import StaticFiles
 if __name__ == "__main__":
     os.chdir('./app')
 from APIs import api, auth
-from utils.err_handler import http_422_handler
 
 # 准备一些环境
 URL_PREFIX = "/" + os.environ.get('KRYTA_URL_PREFIX','')
@@ -68,7 +67,7 @@ def startup_event():
     print("啊我开始了")
 
 # 开始路由
-app.mount("/assets", StaticFiles(directory="./app/html/dist/assets"), name="static")
+app.mount("/_assets", StaticFiles(directory="./app/html/dist/_assets"), name="static")
 
 @app.get("/", response_class=HTMLResponse, status_code=http_code.HTTP_303_SEE_OTHER, tags=['Pages'])
 async def main():
