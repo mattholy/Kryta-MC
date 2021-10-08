@@ -67,11 +67,12 @@ def startup_event():
     print("啊我开始了")
 
 # 开始路由
-app.mount("/_assets", StaticFiles(directory=os.path.join(".","app","html","dist","_assets")), name="static")
+app.mount("/setup/static", StaticFiles(directory=os.path.join(".","app","html","setup")), name="setup")
+app.mount("/dashboard/static", StaticFiles(directory=os.path.join(".","app","html","dashboard")), name="dashboard")
 
-@app.get("/", response_class=HTMLResponse, status_code=http_code.HTTP_303_SEE_OTHER, tags=['Pages'])
+@app.get("/", response_class=FileResponse, status_code=http_code.HTTP_200_OK, tags=['Pages'])
 async def main():
-    return FileResponse('./app/html/dist/index.html')
+    return FileResponse('./app/html/setup/index.html')
 
 # 终止
 @app.on_event("shutdown")

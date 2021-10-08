@@ -19,12 +19,12 @@ URL_PREFIX = os.environ.get('KRYTA_URL_PREFIX','::')
 
 router = APIRouter()
 
-@router.post("/auth", tags=["APIs"])
+@router.post("/auth/login", tags=["APIs"])
 async def user_auth(username:str,password:str):
     '''qwwwwwwwwww'''
     return {"access_token": 'this is a token', "token_type": "bearer"}
 
-@router.post("/signup", tags=["APIs"])
+@router.post("/auth/signup", tags=["APIs"])
 async def signup(username:str,password:str):
     '''qwwwwwwwwww'''
     return {"access_token":'this is a token', "token_type": "bearer"}
