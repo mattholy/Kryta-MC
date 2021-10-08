@@ -1,0 +1,27 @@
+{
+	"version": 1.0,
+	"content": {
+		"page01-title": "你好，</br>欢迎使用Kryta",
+		"page01-content": "Kryta是一个用于管理你的游戏服务器的系统。</br>在你开始使用之前，我们需要完成一些初始化设置。</br>它不会耽搁你很长时间。",
+		"page02-title": "用户协议",
+		"page02-content": "这是用户协议",
+		"page02-yes_btn": "了然，附议",
+		"page02-no_btn": "非也",
+		"page03-title": "需要提供激活码",
+		"page03-content": "如果你没有激活码，别着急，请前往这里获取一个就行，它是免费的",
+		"page04-title": "注册管理员账户",
+		"page04-content": "为了方便你管理这个系统，及其所管理的服务器，你需要注册一个管理员账户",
+		"page04-username_label":"用户名",
+		"page04-password_label":"密码",
+		"page04-cpwd_label":"确认密码",
+		"page04-backuppassword_label":"将账号密码备份至 Kryta Hub",
+		"page05-title": "用户协议",
+		"page05-content": "这是用户协议"
+	},
+	"placeholder":{
+		"page03-setup_code":"请输入激活码",
+		"page04-username":"请输入用户名，仅限数字和英文字母",
+		"page04-password":"请输入密码",
+		"page04-cpwd":"请重复输入密码"
+	}
+}
