@@ -22,7 +22,7 @@
 									<h1 class="major" id="page01-title">{page01-title}</h1>
 									<p id="page01-content">{page01-content}</p>
 									<ul class="actions">
-										<li><a href="#page02" class="button primary color1 circle icon solid fa-angle-right">Next</a></li>
+										<li><a href="#page02" class="button primary color1 circle icon solid fa-angle-right" id="page01-next_page_btn">Next</a></li>
 									</ul>
 								</div>
 								<div class="image span-1-75" data-position="25% 25%">
@@ -36,7 +36,7 @@
 									<h2 class="major" id="page02-title">{page02-title}</h2>
 									<p id="page02-content" style="overflow-y: auto;">{page02-content}</p>
 									<ul class="actions">
-										<li><a class="button primary color2" id="page02-yes_btn">{page02-yes_btn}</a></li>
+										<li><a href="#page03" class="button primary color2" id="page02-yes_btn">{page02-yes_btn}</a></li>
 										<li><a class="button" id="page02-no_btn">{page02-no_btn}</a></li>
 									</ul>
 								</div>
@@ -55,7 +55,7 @@
 											<input type="text" name="name" id="page03-setup_code" placeholder="{page03-setup_code}"/>
 										</ul>
 										<ul class="actions">
-											<li><a class="button primary color1 circle icon solid fa-angle-right" id="page03-verify">Next</a></li>
+											<li><a href="#page04" class="button primary color1 circle icon solid fa-angle-right" id="page03-verify">Next</a></li>
 										</ul>
 									</div>
 									<div class="span-1-5">
@@ -71,7 +71,7 @@
 							</section>
 
 						<!-- 第四页，管理员  -->
-							<section class="panel color2-alt">
+							<section class="panel color2-alt" id="page04">
 								<div class="inner columns">
 									<div class="span-1-5">
 									<h2 class="major" id="page04-title">{page04-title}</h2>
@@ -99,7 +99,7 @@
 												<label for="page04-backuppassword" id="page04-backuppassword_label">Email a copy</label>
 											</ul>
 											<ul>
-												<a class="button primary color1 circle icon solid fa-angle-right" id="page03-verify">Next</a>
+												<a href="#page05" class="button primary color1 circle icon solid fa-angle-right" id="page04-next_btn">Next</a>
 											</ul>
 										</div>
 									</ul>
@@ -108,7 +108,7 @@
 							</section>
 
 						<!-- 第五页，完成页 -->
-							<section class="panel color4-alt">
+							<section class="panel color4-alt" id="page05">
 								<div class="intro color4 span-3-25">
 									<h2 class="major" id="page05-title">{page05-title}</h2>
 									<p id="page05-content">{page05-content}</p>
@@ -130,6 +130,7 @@
 			<script src="setup/static/assets/js/breakpoints.min.js"></script>
 			<script src="setup/static/assets/js/main.js"></script>
 			<script src="setup/static/assets/js/content.js"></script>
+			<script src="setup/static/assets/js/setup.js"></script>
 
 	</body>
 </html>

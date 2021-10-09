@@ -77,9 +77,9 @@ async def main():
 # 终止
 @app.on_event("shutdown")
 def shutdown_event():
-    print("啊我被关闭了")
+    print("啊我被关闭了222")
 
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run("main:app", port=8000, reload=True, debug=True, workers=4)

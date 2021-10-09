@@ -6,10 +6,10 @@
 		"page01-content": "Kryta是一个用于管理你的游戏服务器的系统。</br>在你开始使用之前，我们需要完成一些初始化设置。</br>它不会耽搁你很长时间。",
 		"page02-title": "用户协议",
 		"page02-content": "这是用户协议",
-		"page02-yes_btn": "了然，附议",
-		"page02-no_btn": "非也",
+		"page02-yes_btn": "了然，我同意",
+		"page02-no_btn": "拒绝",
 		"page03-title": "需要提供激活码",
-		"page03-content": "如果你没有激活码，别着急，请前往这里获取一个就行，它是免费的",
+		"page03-content": "如果你还没有激活码，别着急，它是免费的。</br>前往<a href='#'><code>Kryta Hub</code></a>获取一个就可以了。",
 		"page04-title": "注册管理员账户",
 		"page04-content": "你知道的，伙计，要让系统明白你是你，别人是别人，你就得整个账户，然后记下你的密码，不要告诉别人。<br/><pre><code>你的账户会采用高强度的加密进行储存，一旦你忘记密码便无法访问系统。所以，如果你没有把握记住你的密码，可以选择将其备份至Kryta Hub。我们采用行业标准的加密储存方案保管你的账户，确保没有你的批准，我们也无从查看你的密码。</code></pre>",
 		"page04-username_label":"用户名",
@@ -17,8 +17,8 @@
 		"page04-cpwd_label":"确认密码",
 		"page04-backuppassword_label":"将账户加密备份至 Kryta Hub",
 		"page05-title": "哦耶！",
-		"page05-content": "你已经完成了所有需要被完成的事情，点击下方按钮，开始你的故事吧",
-		"page05-gobtn":"建立你的服务器"
+		"page05-content": "你已经完成了所有需要做的事情，点击下方按钮，开始你的故事吧。",
+		"page05-gobtn":"开始你的故事"
 	},
 	"placeholder":{
 		"page03-setup_code":"请输入激活码",
