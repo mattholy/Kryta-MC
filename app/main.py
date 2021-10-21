@@ -20,8 +20,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 # 自定义的一些玩意儿
-if __name__ == "__main__":
-    os.chdir('./app')
 from APIs import api, setup
 
 # 准备一些环境
