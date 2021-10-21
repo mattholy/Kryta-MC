@@ -15,11 +15,10 @@ data_format_defines.py
 from typing import List, Optional
 from pydantic import BaseModel
 
-
-class api_reponse(BaseModel):
-    status: str
-    detail: Optional[dict] = {}
-    mgs: str
+class StandardResponse(BaseModel):
+    status:bool
+    msg:Optional[str] = ''
+    data:dict
 
 api_request_operation_example = {
     "operation":"download",

@@ -22,7 +22,7 @@ from fastapi.staticfiles import StaticFiles
 # 自定义的一些玩意儿
 if __name__ == "__main__":
     os.chdir('./app')
-from APIs import api, auth
+from APIs import api, setup
 
 # 准备一些环境
 URL_PREFIX = "/" + os.environ.get('KRYTA_URL_PREFIX','')
@@ -37,7 +37,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(api.router)
-app.include_router(auth.router)
+app.include_router(setup.router)
+
 description = """
 ## Features
 - Auto generate openapi json
