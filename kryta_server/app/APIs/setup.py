@@ -32,39 +32,79 @@ citizen = RsaController()
 @router.post("/setup/begin", tags=["APIs"], response_model=StandardResponse)
 async def setup_begin():
     '''开始进行激活'''
-    server_info = {
-        'setup_step' : 1
-    }
-    with open("../data/server_data/server_info", 'wb') as f: #打开文件
-        pickle.dump(server_info, f)
-    return {
-        'status':True,
-        'msg':'ok',
-        'data':{}
-    }
+    if os.path.exists("../data/server_data/server_info"):
+        with open("../data/server_data/server_info", 'rb') as f: #打开文件
+            server_info = pickle.load(f)
+    else:
+        server_info = {
+            'setup_step' : 1,
+            'server_id': str(uuid.uuid4())
+        }
+    print(server_info)
+    if server_info['setup_step'] > 1:
+        return {
+            'status':False,
+            'msg':'服务器已经启动了',
+            'data':{}
+        }
+    else:
+        with open("../data/server_data/server_info", 'wb') as f: #打开文件
+            pickle.dump(server_info, f)
+        return {
+            'status':True,
+            'msg':'ok',
+            'data':{
+                'server_id':server_info['server_id']
+            }
+        }
 
 @router.post("/setup/eula", tags=["APIs"], response_model=StandardResponse)
 async def eula():
     '''用户同意EULA'''
-    server_id = str(uuid.uuid4())
-    data = {
-        "data":citizen.encrypt_data(json.dumps(
-            {"server_id":server_id}
-        ))
-    }
-    hub_response = requests.post(
-        url=HUB_URL + "/kryta/api/orion/accept_eula",
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps(data)
-    )
-    print(hub_response.text)
-    return {
-        'status':True,
-        'msg':'ok',
-        'data':{
-            'server_id':server_id
+    if os.path.exists("../data/server_data/server_info"):
+        with open("../data/server_data/server_info", 'rb') as f: #打开文件
+            server_info = pickle.load(f)
+        if server_info['setup_step'] > 2:
+            return {
+                'status':False,
+                'msg':'已经签署过最终用户协议了',
+                'data':{}
+            }
+        data = {
+            "data":citizen.encrypt_data(json.dumps(
+                {"server_id":server_info['server_id']}
+            ))
         }
-    }
+        hub_response = requests.post(
+            url=HUB_URL + "/kryta/api/orion/accept_eula",
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps(data)
+        )
+        server_info['signed'] = True
+        server_info['setup_step'] = 2
+        ## TODO 解析token
+        hub_response = json.loads(hub_response.text)
+        if not hub_response['status']:
+            return {
+                'status':False,
+                'msg':hub_response['msg'],
+                'data':{}
+            }
+        with open("../data/server_data/server_info", 'wb') as f: #打开文件
+            pickle.dump(server_info, f)
+        return {
+            'status':True,
+            'msg':'ok',
+            'data':{
+                'server_id':server_info['server_id']
+            }
+        }
+    else:
+        return {
+            'status':False,
+            'msg':'请执行前置步骤',
+            'data':{}
+        }
 
 @router.post("/setup/code", tags=["APIs"], response_class=JSONResponse)
 async def activation(code:str):
