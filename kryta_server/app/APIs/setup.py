@@ -15,6 +15,7 @@ import os
 import uuid
 import requests
 import json
+import pickle
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
@@ -31,6 +32,11 @@ citizen = RsaController()
 @router.post("/setup/begin", tags=["APIs"], response_model=StandardResponse)
 async def setup_begin():
     '''开始进行激活'''
+    server_info = {
+        'setup_step' : 1
+    }
+    with open("../data/server_data/server_info", 'wb') as f: #打开文件
+        pickle.dump(server_info, f)
     return {
         'status':True,
         'msg':'ok',

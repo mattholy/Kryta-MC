@@ -1,1 +1,7 @@
 aiofiles
+requests
+PyJWT
+sqlalchemy
+pymysql
+pycryptodome
+furl
